@@ -1,0 +1,129 @@
+🟢 Issue #0: Configuração Inicial (Para fazerem juntos agora)
+
+Prioridade: Alta | Prazo: Imediato Descrição: Preparar o terreno para que os códigos funcionem nas duas máquinas.
+
+    [ ] Criar a pasta do projeto.
+
+    [ ] Rodar npm init -y no terminal.
+
+    [ ] Instalar dependências obrigatórias: npm install express cors mongodb web-push body-parser.
+
+    [ ] Gerar chaves VAPID: Rodar npx web-push generate-vapid-keys --json.
+
+    [ ] Criar o arquivo chaves.json na raiz com o resultado do comando acima.
+
+    [ ] Subir essa estrutura inicial para o GitHub/GitLab.
+
+ Alexis: Foco no Backend (Servidor e Admin)
+
+🟨 Issue #1: Estrutura do Servidor e Banco de Dados
+
+Descrição: Criar a API que vai receber os cadastros dos usuários e salvar no MongoDB. Tarefas:
+
+    [ ] Criar o arquivo server.js na raiz.
+
+    [ ] Configurar o Express com cors e express.json().
+
+    [ ] Configurar o express.static("public") para servir os arquivos do PWA (Frontend).
+
+    [ ] Conectar ao MongoDB (Local ou Atlas) criando o banco AppNoticias.
+
+    [ ] Criar Rota POST /api/registrar:
+
+        Deve receber um JSON contendo: { id: "...", categorias: ["..."], subscription: {...} }.
+
+        Deve salvar no banco (Coleção usuarios). Dica: Use updateOne com upsert: true para atualizar se o ID já existir.
+
+    [ ] Testar a rota usando Postman ou Insomnia (enviar um JSON de teste).
+
+🟧 Issue #2: Ferramenta de Linha de Comando (CLI) e Disparo
+
+Descrição: Criar o script que o administrador usa para mandar notícias e a lógica de envio de Push. Tarefas:
+
+    [ ] No Servidor (server.js): Criar rota POST /api/admin/publicar.
+
+        Recebe { categoria, conteudo }.
+
+        Busca no MongoDB todos os usuários que têm essa categoria no array de interesses.
+
+Itera sobre os usuários e usa web-push.sendNotification(user.subscription, ...) para enviar a mensagem.
+
+[ ] Criar script admin.js (Raiz):
+
+    Capturar argumentos via process.argv (Ex: node admin.js tecnologia "Texto da noticia").
+
+Validar se os argumentos existem.
+
+Fazer um fetch para http://localhost:4500/api/admin/publicar enviando os dados.
+
+ Kalleb: Foco no Frontend (PWA e Interface)
+
+🟦 Issue #3: Interface (HTML/CSS) e Lógica de Captura
+
+Descrição: Criar a tela onde o aluno entra e escolhe o que quer ler. Tarefas:
+
+    [ ] Criar pasta public (toda a parte do frontend vai aqui).
+
+    [ ] Criar index.html:
+
+        Campo de texto simples para o ID (Matrícula ou Nome).
+
+Checkboxes para as 5 categorias obrigatórias: Tecnologia, Saúde, Negócios, Natureza, Política .
+
+        Botão "Salvar/Entrar".
+
+        Botão "Instalar App" (inicialmente oculto).
+
+    [ ] Criar client.js:
+
+        Adicionar função urlBase64ToUint8Array (necessária para converter a chave pública).
+
+        Capturar o clique do botão "Salvar".
+
+        Pegar o valor do ID e das Checkboxes marcadas.
+
+        (O envio para o servidor será feito na próxima Issue, por enquanto apenas faça o console.log dos dados).
+
+🟪 Issue #4: Service Worker e Manifesto (Transformar em App)
+
+Descrição: Tornar o site instalável e capaz de receber notificações. Tarefas:
+
+    [ ] Criar manifest.json na pasta public:
+
+        Definir display: standalone.
+
+        Incluir ícones (baixe ícones genéricos ou gere online).
+
+    [ ] Criar sw.js na pasta public:
+
+        Adicionar listener para o evento push.
+
+        Usar self.registration.showNotification para exibir o título e corpo da mensagem recebida.
+
+    [ ] Atualizar client.js:
+
+        Registrar o Service Worker (navigator.serviceWorker.register).
+
+        Gerar a subscription usando pushManager.subscribe.
+
+        Integração: Fazer o fetch para a rota /api/registrar enviando ID, Categorias e Subscription.
+
+🤝 Issue #5: Integração Final e Teste com Ngrok
+
+Prioridade: Crítica (Fazer juntos) Descrição: O PWA precisa de HTTPS ou localhost para funcionar. Para testar no celular, usaremos Ngrok.
+
+    [ ] Pessoa 1 roda o servidor: node server.js.
+
+    [ ] Instalar Ngrok e rodar: ngrok http 4500.
+
+[ ] Pessoa 2 abre o link HTTPS gerado pelo Ngrok no navegador do celular.
+
+[ ] Teste de Fluxo Completo:
+
+    Inserir ID "aluno1" no celular.
+
+    Marcar "Tecnologia" e salvar (aceitar permissão de notificação).
+
+    Pessoa 1 vai no terminal do PC e roda: node admin.js tecnologia "Teste final aprovado!".
+
+    Verificar se a notificação apareceu na barra de status do celular.
