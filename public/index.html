@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=yes">
+    <meta http-equiv="x-ua-compatible" content="IE=Edge">
+    <title>Notícias PWA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+    </style>
+    <link rel="manifest" href="/manifest.json">
+    <script src="src/push.js"></script>
+    <script src="src/app.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Notícias PWA</h1>
+    </header>
+    <main>
+        <p>Bem vindo! Identifique-se e escolha seus interesses:</p>
+        <input type="text" id="id_usuario" placeholder="Seu usuário">
+        <h3>Categorias: </h3>
+        <label><input type="checkbox" name="categoria" value="tecnologia">Tecnologia</label>
+        <label><input type="checkbox" name="categoria" value="saude">Saúde</label>
+        <label><input type="checkbox" name="categoria" value="negocios">Negócios</label>
+        <label><input type="checkbox" name="categoria" value="natureza">Natureza</label>
+        <label><input type="checkbox" name="categoria" value="politica">Política</label>
+        <br>
+        <button id="btn-save">Salvar e ativar notificações</button>
+
+        <div id="instalador">
+            <p>Instale no seu celular! </p>
+            <button id="btn-install">Instalar</button>
+        </div>
+
+    </main>
+</body>
+</html>

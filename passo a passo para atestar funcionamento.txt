@@ -1,0 +1,8 @@
+Funcionamento
+
+1- rodar o server.js no diretório (node ./server.js)
+2- abrir http://localhost:4500
+3- limpar os dados do navegador (application/storage/clear site data) para que usos anteriores não interfiram
+4- preencher os dados, clicar em salvar, posteriormente instalar
+5- realizar a publicação de uma notícia (node ./admin.js categoria "noticia")
+6- verificar que a notificação chegou
