@@ -1,0 +1,41 @@
+{
+  "name": "Notícias App",
+  "short_name": "Notícias",
+  "description": "Seu aplicativo de notícias",
+  "lang": "pt",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0044a5",
+  "theme_color": "#0044a5",
+  "orientation": "portrait",
+  "launch_handler": {"client_mode": ["navigate-existing", "auto"]},
+  "screenshots": [
+    {
+      "src": "screenshots/azusa.jpg",
+      "sizes": "864x960",
+      "type": "image/jpg",
+      "form_factor": "wide"
+    },
+    {
+      "src": "screenshots/azusa.jpg",
+      "sizes": "864x960",
+      "type": "image/jpg",
+      "form_factor": "narrow"
+    }
+  ],
+"permissions": [
+    "notifications"
+  ],
+  "icons": [
+    {
+      "src": "icons/mini-azusa.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/azusa.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
