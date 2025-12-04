@@ -15,7 +15,7 @@ webpush.setVapidDetails(
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static("PWA"));
+app.use(express.static("public"));
 
 
 const urlMongo = "mongodb://localhost:27017";
